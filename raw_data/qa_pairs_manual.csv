@@ -1,0 +1,296 @@
+Question,Answer
+"In gradient descent algorithm for f(θ) = (2θ + 3)², which statements are true: 1) If gradient descent satisfies its termination criterion (other than stopping after a number of iterations) then it will generally be close to a point where the gradient is zero 2) Gradient descent will always find a global optimum of any function 3) Gradient descent with an appropriate step size can get arbitrarily close to a global optimum of any smooth convex function 4) The step size η controls how much along the gradient we descend in each step","Statements 1, 3, and 4 are true. Gradient descent will find the local minimum of a function given an appropriate step size. It is not guaranteed to find a global minimum unless a function is convex. It is also not guaranteed to converge for all step sizes."
+"For the function f(θ) = (2θ + 3)², what is the gradient descent update rule in terms of θ and η?","θnew = θ−η·(8·θ+12). Using basic rules of differentiation, we find ∇θ f(θ) = df(θ)/dθ = 2·(2θ+3)·2"
+"For the function f(θ) = (2θ + 3)², starting with θ = 1 and η = 0.1, what is the value of f(θ) before running any iterations of gradient descent?",f(1) = (2 · 1 + 3)² = 25
+"For the function f(θ) = (2θ + 3)², after a single gradient descent update, starting with θ = 1 and η = 0.1, what is the value of θ?",θ(1) = θ(0) − η(8θ(0) + 12) = 1 − 0.1 · (20) = −1
+"For the function f(θ) = (2θ + 3)², after that update, what is the value of the function f(θ)?",f(−1) = (2 · (−1) + 3)² = 1
+"In gradient descent with very very small η, what will generally be true about f(θt-1) and f(θt)?","f(θt-1) ≥ f(θt). For a very very small η, the gradient descent will never worsen (increase) the value of the function it is minimizing. Intuitively, there will always be a small enough step size such that a step in the direction of steepest descent decreases (or more precisely, does not increase) the function value."
+"In gradient descent with very very big η, what will generally be true about f(θt-1) and f(θt)?","Cannot say. For very very big η, we cannot say anymore whether the value of the function is going to decrease or increase."
+"When using an optimal step size η* = arg min f(θt-1 − η∇θ f(θt-1)), what will generally be true about f(θt-1) and f(θt)?","f(θt-1) ≥ f(θt). The value of the function will decrease (or stay the same) with each step. This follows from the fact that before we take the step, we optimize for the best step value that will decrease the value of the function f the most."
+"Regarding the approach of selecting optimal step size η*, which statements are true: 1) The approach is guaranteed to converge to a global minimum 2) The approach is 'efficient' in that it will generally converge to a local optimum in fewer gradient descent steps relative to a fixed 3) The approach is 'inefficient' in that it may require a lot of computation to find η* at each gradient descent step","Statements 2 and 3 are true. It would be wonderful if or when we are lucky enough to have a simple computation to solve the optimization problem for η*, as it would enable us to reduce the number of gradient descent steps needed to find a local minimum. Unfortunately, we rarely have a simple or efficient way to find this optimal η*. In practice, constant η or slowly reducing η from one step to the next is typically used instead."
+"In linear logistic regression with g = σ(θᵀx + θ0) where θ = [1,0]ᵀ and θ0 = -0.5, what are the values of z = θᵀx + θ0 for inputs: Input1=[1,1]ᵀ, Input2=[0,0]ᵀ, Input3=[1,0]ᵀ, Input4=[0,1]ᵀ?","z(1) = 0.5, z(2) = -0.5, z(3) = 0.5, z(4) = -0.5"
+"In linear logistic regression with g = σ(θᵀx + θ0) where θ = [1,0]ᵀ and θ0 = -0.5, with threshold at σ(z) = 0.5, what are the corresponding predicted labels for inputs: Input1=[1,1]ᵀ, Input2=[0,0]ᵀ, Input3=[1,0]ᵀ, Input4=[0,1]ᵀ?","ŷ(1) = 1, ŷ(2) = 0, ŷ(3) = 1, ŷ(4) = 0. Note that you did not need to explicitly calculate σ(z) to get this answer. One possibility was to recall that σ(z) = 0.5 happens at z = 0. Another possibility was to use your sketch of the separator."
+"In general, given a linearly separable dataset, if the objective function for linear logistic regression doesn't have the regularization term, what would happen to ||θ||? Will it: 1) blow up to ∞ or 2) be close to 0?","||θ|| will blow up to ∞. When the dataset is linearly separable, there exists some θinit, θ0init that will separate the data perfectly. Then, θ = c · θinit, θ0 = c · θ0init will also separate the dataset perfectly, for any constant c > 0. When there is no regularization, we minimize the NLL loss function by increasing c to get a higher probability (→ 1) for points with label 1, and lower probability (→ 0) for points with label 0. And ||θ|| = c · ||θinit||, |θ0| = c · |θ0init|. So c can be infinitely large, resulting in the magnitude of the parameters tending to be very large."
+"For a nonlinearly separable 2D dataset using linear logistic regression function σ(θᵀx + θ0), given two plots where (a) shows a linear decision boundary and (b) shows a curved decision boundary, which type of decision boundary could have been learned by linear logistic regression? Options: 1) Only plot (a) 2) Only plot (b) 3) Both plots","Only plot (a) shows a decision boundary that could have been learned by linear logistic regression. For the linear logistic regression algorithm, remember that the threshold for being considered positive is when σ(θᵀx + θ0) > 0.5. This happens when θᵀx + θ0 > 0. And as we've seen before, the decision boundary θᵀx + θ0 = 0 defines a hyperplane, and when the data is 2D, that hyperplane is a line. So the classification boundary must be a (single) line! Therefore, only plot (a) shows a feasible decision boundary learned by the linear logistic regression algorithm."
+"For predicting gas mileage (low vs. high), what is the best encoding for car brand feature (e.g., Chevy, Ford, Toyota, VW)? Options: 1) An integer valued feature: 1, 2, 3, 4 2) Two binary valued features: 00, 01, 10, 11 3) 4 unary features (one-hot): 1000, 0100, 0010, 0001","4 unary features (one-hot): 1000, 0100, 0010, 0001. Integers are not a good idea since the ordering is arbitrary. Similarly, binary features imply an ordering. The one-hot encoding is most appropriate, since the behavior of the different brands will be largely independent."
+"For predicting life expectancy (>50 years vs <50 years), what is the best encoding for a person's weight (in kg), given that there is also a real-valued height feature in meters? Options: 1) A real-valued feature: weight in kg 2) A standardized real-valued feature 3) 3 (one-hot) features for categories (<40kg, 40-80kg, >80kg)","A standardized real-valued feature. If we assume that weight is correlated with life-expectancy, we do want to preserve ordering information, so one-hot encoding is probably not good. It is often the case that making the range of values of features similar is helpful in linear classification. In this case, the clearly related height feature is going to be a number less than three, which is significantly less than weight in kilograms. Hence, it is a good idea to scale the weight to aid linear classification. The standardized real-valued feature would be scaled and shifted such that this feature's distribution is now centered on 0 with standard deviation 1."
+"Given a one-dimensional dataset D = {(-1, +1), (0, -1), (1, +1)} which is not linearly separable, which of these feature transformations lead to a linearly separable problem? Options: 1) φ(x) = 0.5·x 2) φ(x) = |x| 3) φ(x) = x³ 4) φ(x) = x⁴ 5) φ(x) = x²ᵏ for any positive integer k 6) φ(x) = x²ᵏ⁺¹ for any positive integer k","Options 2, 4, and 5 make the data linearly separable. 1) φ(x) = 0.5·x scales the points down by 0.5, points are still on opposite sides of origin, so does not separate data. 2) φ(x) = |x| maps the +1 labeled points to 1 and the -1 labeled point to 0, so separates the data. 3) φ(x) = x³ maps the data to itself, so does not separate data. 4) φ(x) = x⁴ performs the same feature mapping as (2), so separates the data. 5) φ(x) = x²ᵏ performs the same feature mapping as (2), regardless of the integer k, so separates the data. 6) φ(x) = x²ᵏ⁺¹ maps the data to itself the same as (3), regardless of the integer k, so does not separate data."
+"Given a feature transformation φ(x) = [x, x²]ᵀ on the previous dataset and a linear classifier with θ = [0,1]ᵀ and θ₀ = -0.25 that achieves perfect accuracy, what points from the original space R get classified as members of the negative class? Write the interval [start, end] such that all values x ∈ [start, end] are classified to be members of the negative class.","[-0.5, 0.5]. With θ = [θ₁, θ₂]ᵀ = [0, 1]ᵀ and θ₀ = -0.25, our separator is the line θ₂ = 0.25 in R². From our original space R, points mapped onto the separator are those for which x² = 0.25, leading to x = ±0.5 on the separator. Then, either points inside the range [-0.5, 0.5] are going to be negative class or points outside the range [-0.5, 0.5] are negative class. We can see that if |x| ≤ .5, we get x² - 0.25 < 0. Hence, points x in the range [-0.5, 0.5] will be classified as members of the negative class."
+"When Alex was first studying machine learning, he sometimes wondered about the relationship between linear regression, logistic regression, and neural networks. Is there actually any? Two layers, f1 is ReLU, f2 is identity (i.e., f(z) = z), loss is squared loss. Which of the following is this equivalent to?",A different kind of reasonable neural network
+"When Alex was first studying machine learning, he sometimes wondered about the relationship between linear regression, logistic regression, and neural networks. Is there actually any? One layer, f is identity, loss is NLL. Which of the following is this equivalent to?",An ill-formed neural network
+"When Alex was first studying machine learning, he sometimes wondered about the relationship between linear regression, logistic regression, and neural networks. Is there actually any? One layer, f is identity, loss is squared loss. Which of the following is this equivalent to?",Linear regression
+"When Alex was first studying machine learning, he sometimes wondered about the relationship between linear regression, logistic regression, and neural networks. Is there actually any? Two layers, f1 is identity, f2 is sigmoid, loss is NLL. Which of the following is this equivalent to?",Logistic regression
+"When Alex was first studying machine learning, he sometimes wondered about the relationship between linear regression, logistic regression, and neural networks. Is there actually any? One layer, f is sigmoid, loss is NLL. Which of the following is this equivalent to?",Logistic regression
+"When Alex was first studying machine learning, he sometimes wondered about the relationship between linear regression, logistic regression, and neural networks. Is there actually any? Two layers, f1 is sigmoid, f2 is sigmoid, loss is NLL. Which of the following is this equivalent to?",A different kind of reasonable neural network
+"When Alex was first studying machine learning, he sometimes wondered about the relationship between linear regression, logistic regression, and neural networks. Is there actually any? Two layers, f1 is sigmoid, f2 is identity, loss is NLL. Which of the following is this equivalent to?",An ill-formed neural network
+"When Alex was first studying machine learning, he sometimes wondered about the relationship between linear regression, logistic regression, and neural networks. Is there actually any? Two layers, f1 is sigmoid, f2 is identity, loss is squared loss. Which of the following is this equivalent to?",A different kind of reasonable neural network
+"In CNN Operations, given a 1D binary image I and filter F of size 3 with no padding and no bias applied with stride of 1, what is the length L1 of the resulting vector?","8. The size after the convolution is reduced to 8, because we did not pad the image and the filter cannot be centered on the first or last pixels in I. In general, for a stride of 1, the size of the output layer is reduced by |F| − 1 pixels where |F| is the size of the filter."
+"In CNN Operations, after taking the output from the previous operation and applying ReLU activation to each element, then applying a max pooling filter of size 2 with stride 2, what is the length L2 of the resulting vector?","4. Because we have a max pooling filter of size 2 and a stride of 2, we are only retaining the max of every 2 elements, and so our size is reduced by a factor of 2 from 8 to 4."
+"In CNN Operations, when applying a fully connected layer with a single output where every weight leading to the output is set to 1 and bias b = -0.5, using the sign(z) activation function (where sign(z)=1 if z>0, 0 otherwise), what is the value of this single output?",1. We gave computed sign(z) = sign(1 + 0 + 0 + 0 − 0.5) = 1.
+"In CNN concepts, which type of layer would be best to use to detect low-level features (like lines, curves, etc.) of an animal in an image?","Convolutional. Filters in the first convolutional layers are responsible for detecting low-level features (e.g., edges, color, contrast). Later convolutional layers are responsible for detecting mid-level features (e.g., ears, eyes)."
+"In CNN concepts, given a set of inputs where each input represents whether a useful feature of animals (tail, beak, whiskers, etc.) occurs anywhere in an image, which type of layer would be best to use to turn these inputs into a classification of whether the image is a cat, dog, lizard, etc.?",Fully connected. Fully connected layers allow combining features from the entire image and provide the final network output.
+"In CNN concepts, if you have detected occurrences of some useful low-level feature, like a furry tail, throughout your image and would like to use these local detections to figure out whether or not the furry tail occurred anywhere within larger regions of the image, which layer would be best to use?",Max pooling. Max pooling layers detect the strongest response within a given window. This property allows the network to be less sensitive to feature locations.
+"In a residual block with a skip connection where out = x + SomeLayers(x), what must be the shape of the output of the skip connection? Options: (1) The same as the input to the residual block (2) Larger than the input to the residual block (3) Smaller than the input to the residual block (4) Dependent on the number of layers in the residual block","The same as the input to the residual block. We need the dimension of x to match the dimension of the output of the residual block so that addition is properly defined. In practice, if this doesn't hold in an architecture, we would add a linear layer (without activation) to map x to the correct dimension, such that out = W x + SomeLayers(x)."
+"Given a neural network with dataset X = [[0,0],[1,1],[3,2]], Y = [[0],[1],[0]], where each row of X is a data point and corresponding row of Y is its label, using step activation function f(z) that returns 1 if z > 0 and 0 otherwise, first layer weights w1 = [[1,0],[-1,0]] and bias = [-0.5,1.5], compute the matrix A1 where each row represents the outputs of the hidden units (f1(z1) and f1(z2)) for the corresponding input vector in X.","[[0,1],[1,1],[1,0]]"
+"In a neural network using batch normalization, given A1 = [[0,1],[1,1],[1,0]], initial values of μ and σ are all-zeros, and β = 0.5, compute the updated running statistics using the formula: μ ← βμ + (1-β)μ_batch and σ2 ← βσ2 + (1-β)σ2_batch, where μ_batch = (1/b)∑(A1_i) and σ2_batch = (1/b)∑(A1_i - μ_batch)^2.","μ = [1/3, 1/3], σ2 = [1/9, 1/9]"
+"Given a neural network with dataset X = [[0,0],[1,1],[3,2]], Y = [[0],[1],[0]], using step activation function f(z) that returns 1 if z > 0 and 0 otherwise, first layer weights w1 = [[3,0],[-1,0]] and bias = [-4,1.5], compute the matrix A1 where each row represents the outputs of the hidden units (f1(z1) and f1(z2)) for the corresponding input vector in X.","[[0,1],[0,1],[1,0]]"
+"In a neural network using batch normalization, given A1 = [[0,1],[0,1],[1,0]], previous running statistics μ = [1/3, 1/3] and σ2 = [1/9, 1/9], and β = 0.5, compute the updated running statistics using the formula: μ ← βμ + (1-β)μ_batch and σ2 ← βσ2 + (1-β)σ2_batch, where μ_batch = (1/b)∑(A1_i) and σ2_batch = (1/b)∑(A1_i - μ_batch)^2.","μ = [1/3, 1/2], σ2 = [1/6, 1/6]"
+"In transformers with self-attention layers, what is the high-level mapping transformation that occurs?",The transformer maps from R^(n×d) to R^(n×d)
+"In transformers, what does the self-attention layer compute for each token x(i)?","For each token x(i), it computes (via learned projections) a query qi, key ki, and value vi, each in R^(dk×1)"
+What does αij represent in the attention matrix A?,αij helps answer the question 'which tokens x(j) help the most with predicting the corresponding output token y(i)?'
+How is the attention output y(i) calculated in transformers?,The attention output is given by a weighted sum over the values: y(i) = sum(αij * vj) for j=1 to n
+"Transformers (1.1) - Why does dot product normalization matter?: If entries in queries and keys are within a bounded range (e.g., 0,1), how does the dot product between qi and kj generally behave?",The dot product between qi and kj grows (in magnitude) with dk
+Transformers (1.1) - Why does dot product normalization matter?: What is the range of the softmax function?,The range of the softmax function is between 0 and 1 (asymptotically getting to 0 and 1)
+Transformers (1.1) - Why does dot product normalization matter?: How does the softmax function behave for random inputs of very large positive and negative values?,The output of the softmax function will be close to zero or one
+Transformers (1.1) - Why does dot product normalization matter?: How does the softmax function behave for random inputs between -1 and 1?,The softmax function will be distributed between zero and one
+Transformers (1.1) - Why does dot product normalization matter?: How do very large input values affect softmax gradients and training?,"Very large inputs (positive and negative) values make the softmax gradient close to 0, which makes training difficult"
+Transformers (1.2) - Regarding attention weights: What is true about the sum of αij for all i given a specific j?,"For each specific value of i, aij is a probability distribution across j (meaning the sum of αij for all j equals 1)"
+Transformers - What is important to know about computing self-attention scores?,"It's important that self-attention scores can be computed quickly, since we need to compute the attention scores for all pairs of i and j tokens"
+"Consider a tiny MDP with states s ∈ {0, 1, 2, 3} and actions a ∈ {b, c}. Given the reward and transition functions with an infinite horizon and a discount factor of γ = 0.9, what are the Q values after iteration 1?","Q1 matrix values are: State 0: Q(0,b)=0, Q(0,c)=0 State 1: Q(1,b)=1, Q(1,c)=1 State 2: Q(2,b)=0, Q(2,c)=0 State 3: Q(3,b)=2, Q(3,c)=2"
+"Consider a tiny MDP with states s ∈ {0, 1, 2, 3} and actions a ∈ {b, c}. Given the reward and transition functions with an infinite horizon and a discount factor of γ = 0.9, what are the Q values after iteration 2?","Q2 matrix values are: State 0: Q(0,b)=0.81, Q(0,c)=0.09 State 1: Q(1,b)=1.09, Q(1,c)=1.09 State 2: Q(2,b)=1.62, Q(2,c)=1.62 State 3: Q(3,b)=2.18, Q(3,c)=2.18"
+"Consider a tiny MDP with states s ∈ {0, 1, 2, 3} and actions a ∈ {b, c}. Given the reward and transition functions with an infinite horizon and a discount factor of γ = 0.9, what are the Q values after iteration 3?","Q3 matrix values are: State 0: Q(0,b)=1.0287, Q(0,c)=1.4103 State 1: Q(1,b)=1.7542, Q(1,c)=1.7542 State 2: Q(2,b)=1.9116, Q(2,c)=1.9116 State 3: Q(3,b)=2.8523, Q(3,c)=2.8523"
+"Consider a tiny MDP with states s ∈ {0, 1, 2, 3} and actions a ∈ {b, c}. After the third iteration, what action would the optimal policy select in state 0?","Action c, because Q(0,c) > Q(0,b)"
+"In Q-learning with states S = {0, 1, 2, 3}, actions A = {b, c}, discount factor γ = 0.9, learning rate α = 0.5, and all Q-values initialized to 0, given experience tuple at t = 0: (s, a, s′, r) = (0, b, 2, 0), what is the state in the state-action pair that is updated?",0
+"In Q-learning with states S = {0, 1, 2, 3}, actions A = {b, c}, discount factor γ = 0.9, learning rate α = 0.5, and all Q-values initialized to 0, given experience tuple at t = 0: (s, a, s′, r) = (0, b, 2, 0), what is the action in the state-action pair that is updated?",b
+"In Q-learning with states S = {0, 1, 2, 3}, actions A = {b, c}, discount factor γ = 0.9, learning rate α = 0.5, and all Q-values initialized to 0, given experience tuple at t = 0: (s, a, s′, r) = (0, b, 2, 0), what is max_a′ Q(s′, a′) for t = 0?",0
+"In Q-learning with states S = {0, 1, 2, 3}, actions A = {b, c}, discount factor γ = 0.9, learning rate α = 0.5, and all Q-values initialized to 0, given experience tuple at t = 0: (s, a, s′, r) = (0, b, 2, 0), what is the new Q-value for the state action pair that is updated?",0
+"In Q-learning with states S = {0, 1, 2, 3}, actions A = {b, c}, discount factor γ = 0.9, learning rate α = 0.5, given experience tuple at t = 1: (s, a, s′, r) = (2, b, 3, 0), what is the state in the state-action pair that is updated?",2
+"In Q-learning with states S = {0, 1, 2, 3}, actions A = {b, c}, discount factor γ = 0.9, learning rate α = 0.5, given experience tuple at t = 1: (s, a, s′, r) = (2, b, 3, 0), what is the action in the state-action pair that is updated?",b
+"In Q-learning with states S = {0, 1, 2, 3}, actions A = {b, c}, discount factor γ = 0.9, learning rate α = 0.5, given experience tuple at t = 1: (s, a, s′, r) = (2, b, 3, 0), what is max_a′ Q(s′, a′) for t = 1?",0
+"In Q-learning with states S = {0, 1, 2, 3}, actions A = {b, c}, discount factor γ = 0.9, learning rate α = 0.5, given experience tuple at t = 1: (s, a, s′, r) = (2, b, 3, 0), what is the new Q-value for the state action pair that is updated?",0
+"In Q-learning with states S = {0, 1, 2, 3}, actions A = {b, c}, discount factor γ = 0.9, learning rate α = 0.5, given experience tuple at t = 2: (s, a, s′, r) = (3, b, 0, 2), what is the new Q-value for the state action pair that is updated?",1
+"In Q-learning with states S = {0, 1, 2, 3}, actions A = {b, c}, discount factor γ = 0.9, learning rate α = 0.5, given experience tuple at t = 3: (s, a, s′, r) = (0, b, 2, 0), what is the new Q-value for the state action pair that is updated?",0
+"In Q-learning with states S = {0, 1, 2, 3}, actions A = {b, c}, discount factor γ = 0.9, learning rate α = 0.5, given experience tuple at t = 4: (s, a, s′, r) = (2, b, 3, 0), what is the new Q-value for the state action pair that is updated?",0.45
+"In Q-learning with states S = {0, 1, 2, 3}, actions A = {b, c}, discount factor γ = 0.9, learning rate α = 0.5, given experience tuple at t = 5: (s, a, s′, r) = (3, c, 0, 2), what is the new Q-value for the state action pair that is updated?",1
+"In a Deep Q-learning problem with states S = {0, 1, 2, 3} and actions A = {b, c}, when using one-hot encoding to represent states as inputs to the Q-network (where states are represented as binary vectors with a 1 in the position corresponding to the state number and 0s elsewhere), how many units should the input layer of the Q-network have?","4. The input layer consists of the features that represent each input. Using a one-hot encoding, each state is represented by four features (e.g., state 0 as [1,0,0,0], state 1 as [0,1,0,0], etc.), so our network has 4 input units."
+"In a Deep Q-learning problem with states S = {0, 1, 2, 3} and actions A = {b, c}, where the Q-network needs to output a Q-value for each possible action, how many units should the output layer of the Q-network have?","2. Since there are 2 possible actions (b and c), and the Q-network must output the Q-value for each of the actions, we need 2 output neurons."
+"In Deep Q-learning with one-hot encoded states, when processing an experience tuple (s, a, s′, r) = (0, b, 2, 1) where s=0 represents the current state, what is the correct one-hot encoded vector input to the Q-network for state s=0?","[1, 0, 0, 0]. For state 0, we use one-hot encoding where the first position (corresponding to state 0) is 1 and all other positions are 0."
+"In Deep Q-learning with states S = {0, 1, 2, 3} and actions A = {b, c}, when processing an experience tuple (s, a, s′, r) = (0, b, 2, 1), which contains the current state s=0, action taken a=b, next state s′=2, and reward r=1, what is the one-hot encoded vector input to the target Q-network for the next state s′=2?"",""[0, 0, 1, 0]","For the next state s′=2, we use one-hot encoding where the third position (corresponding to state 2) is 1 and all other positions are 0."
+"In Deep Q-learning with a target network Q_target whose weights and biases are all initialized to 0, when computing max_a′ Q_target(s′, a′) for any state s′, what value will be returned during the first update?","0 (When the Q_target network's weights and biases are all initialized to 0, any input will produce an output of 0. Therefore, the maximum Q-value across all possible actions will also be 0.)"
+"In Deep Q-learning with discount factor γ = 0.9, given an experience tuple (s, a, s′, r) = (0, b, 2, 1) where Q(s, a) = 0 and max_a′ Q_target(s′, a′) = 0, what is the loss L computed using the formula L = (Q(s, a) − (r + γ max_a′ Q_target(s′, a′)))²?",The loss L = (0 − (1 + 0.9 * 0))² = (0 − 1)² = 1
+What is the fundamental difference between linear regression and logistic regression when used for classification?,"Linear regression minimizes mean squared error and outputs unbounded numerical values, while logistic regression uses negative log-likelihood (NLL) loss and outputs probabilities between 0 and 1 through the sigmoid function. This makes logistic regression naturally suited for classification tasks."
+What is the sigmoid function and what are its key properties?,"The sigmoid function σ(z) = 1/(1 + e^(-z)) has these key properties:
+- Output range is (0,1)
+- σ(0) = 0.5
+- Monotonically increasing
+- Symmetric around z=0
+- Approaches but never reaches 0 or 1"
+Why is σ(0) = 0.5 particularly important in logistic regression?,"σ(0) = 0.5 determines the decision boundary. When θᵀx + θ₀ = 0, the model predicts probability 0.5, making this the natural threshold between classes. Any input giving a positive value predicts class 1, and any input giving a negative value predicts class 0."
+"Given a dataset {(1,0), (2,0), (3,1), (100,1)}, why does linear regression fail to find a good decision boundary?","Linear regression fails because:
+1. The distant point (100,1) has disproportionate influence on the slope
+2. Linear regression tries to fit all points exactly to 0 or 1
+3. This forces a very shallow slope that prevents placing the decision boundary (y=0.5) between classes"
+What happens to logistic regression parameters when the data is perfectly linearly separable and there's no regularization?,"When data is perfectly separable without regularization:
+1. Parameters grow to infinity
+2. No finite optimal solution exists
+3. Larger parameters always give better NLL loss
+4. Predictions get pushed closer to 0 and 1"
+What is the derivative of the sigmoid function with respect to its input z?,The derivative is σ'(z) = σ(z)(1-σ(z)) = e^(-z)/(1+e^(-z))². This can be expressed simply as o(1-o) where o = σ(z).
+What is the maximum value of the sigmoid function's derivative and when does it occur?,"The maximum value is 0.25 and occurs at z=0. This happens because:
+1. The derivative is o(1-o)
+2. This expression is maximized when o = 0.5
+3. o = 0.5 occurs at z = 0
+4. Maximum value is 0.5 * (1-0.5) = 0.25"
+Why can't the derivative of the sigmoid function ever be zero?,"The derivative o(1-o) can never be zero because:
+1. o is always between 0 and 1 (exclusive)
+2. (1-o) is always between 0 and 1 (exclusive)
+3. Their product is always positive but approaches zero as z→±∞"
+What is the gradient of NLL loss with respect to θ in binary classification?,"The gradient is x(g-y) where:
+- x is the input feature vector
+- g is the predicted probability σ(θᵀx + θ₀)
+- y is the true label (0 or 1)
+This elegant form comes from combining the chain rule with the sigmoid derivative."
+Why is the gradient of NLL loss so much simpler than the original loss function?,"The gradient simplifies because:
+1. The log terms in NLL cancel with terms from the sigmoid derivative
+2. The chain rule combines elegantly with the sigmoid's derivative
+3. The (g-y) term naturally emerges from the combination"
+What is the softmax function and why is it used in multi-class logistic regression?,"The softmax function transforms raw scores into probabilities by:
+1. Taking exponentials of all inputs: exp(z_i)
+2. Dividing each by sum of all exponentials
+3. Ensures outputs sum to 1 and are all positive
+4. Generalizes sigmoid to multiple classes"
+"Given z = [-1, 0, 1], what steps do you take to compute softmax probabilities?","To compute softmax(z):
+1. Calculate exp(z) = [0.368, 1, 2.718]
+2. Sum the exponentials: 4.086
+3. Divide each exp(z_i) by sum
+4. Get probabilities: [0.09, 0.245, 0.665]"
+"In multi-class logistic regression, what is the dimension of the parameter matrix θ?","For input dimension d and K classes:
+1. θ has dimensions d×K
+2. Each column represents weights for one class
+3. Need K sets of weights to compute K different scores
+4. Results in d×K parameters (plus K bias terms if using θ₀)"
+What is NLLM loss and how does it differ from binary NLL?,"NLLM (Multi-class Negative Log-Likelihood):
+1. Takes one-hot encoded true labels
+2. Uses softmax instead of sigmoid
+3. Loss is -log of predicted probability for true class
+4. Generalizes binary NLL to multiple classes"
+"If predicted probabilities are [0.3, 0.5, 0.2] and true label is [0, 1, 0], what is NLLM?","NLLM = -log(0.5) because:
+1. True label is one-hot encoded with 1 in second position
+2. Model predicted 0.5 for this class
+3. Only care about log probability of correct class
+4. Other probabilities don't directly affect loss"
+What assumptions does logistic regression make about the data?,"Key assumptions:
+1. Features are independent
+2. Linear decision boundary is appropriate
+3. No multicollinearity
+4. Large enough sample size
+5. Features are relevant to prediction"
+How do you handle class imbalance in logistic regression?,"Common approaches:
+1. Class weights in loss function
+2. Oversampling minority class
+3. Undersampling majority class
+4. SMOTE or other synthetic sampling
+5. Adjust decision threshold"
+What causes logistic regression to underfit?,"Underfitting can occur due to:
+1. Too strong regularization
+2. Missing important features
+3. Too simple model for complex data
+4. Linear boundary inappropriate
+5. Noisy or insufficient data"
+How do you handle feature selection in logistic regression?,"Feature selection methods:
+1. L1 regularization (Lasso)
+2. Forward/backward selection
+3. Information criteria (AIC/BIC)
+4. Cross-validation performance
+5. Domain knowledge"
+What are signs that logistic regression is failing?,"Warning signs include:
+1. Poor convergence
+2. Unstable parameter estimates
+3. Very large/small coefficients
+4. Poor calibration of probabilities
+5. No improvement over baseline"
+When should you use logistic regression vs. other models?,"Consider logistic regression when:
+1. Linear decision boundary is appropriate
+2. Interpretability is important
+3. Limited computational resources
+4. Need probability estimates
+5. Want stable, well-understood model"
+What are the two main modules that make up each layer in a neural network according to the homework?,"Each layer consists of:
+1. A linear module that implements a linear transformation
+2. An activation module that applies an activation function to the outputs of the linear module"
+"In the notation used, what does 𝑊𝑙 represent in a neural network?","𝑊𝑙 represents the weight matrix for layer 𝑙, which is an 𝑚𝑙×𝑛𝑙 matrix"
+What is the relationship between 𝑛𝑙 and 𝑚𝑙+1 in the neural network notation?,They are equal - the number of outputs from layer 𝑙 (𝑛𝑙) equals the number of inputs to layer 𝑙+1 (𝑚𝑙+1)
+What does ReLU(𝑥) output when 𝑥 is negative?,ReLU(𝑥) outputs 0 for any negative input 𝑥
+"In a ReLU network, if the input to a unit is 𝑧=−2, what will be the output 𝑎?",The output will be 𝑎=0 since ReLU outputs 0 for all negative inputs
+"If a neural network layer has 3 inputs and 4 outputs, what will be the dimensions of its weight matrix 𝑊?",The weight matrix 𝑊 will have dimensions 3×4 (𝑚𝑙×𝑛𝑙)
+"In the example network from section 2, what happens to the output when all hidden units output zero?","When all hidden units output zero (𝑓(𝑧11)+𝑓(𝑧12)+𝑓(𝑧13)+𝑓(𝑧14)=0), the network outputs [1/(1+𝑒2), 𝑒2/(1+𝑒2)]"
+What is the derivative of ReLU with respect to its input when the input is positive?,The derivative is 1 when the input is positive
+"During backpropagation, what is the order in which the modules' backward methods are called?","The backward methods are called in reverse order, starting from the output layer and moving backward through the network"
+What does dLdW represent in the context of backpropagation?,dLdW represents the gradient of the loss with respect to the weights (𝑑𝐿𝑜𝑠𝑠/𝑑𝑊)
+"In the linear module's backward method, what are the dimensions of dLdZ?","dLdZ is a 1×𝑛𝑙 vector, where 𝑛𝑙 is the number of outputs from the layer"
+What is the expression for computing dLdA in terms of dLdZ and W?,dLdA = dLdZ @ W.T (matrix multiplication of dLdZ with the transpose of W)
+What shape do the decision boundaries of individual hidden units have in the example network?,The decision boundaries are lines (linear boundaries)
+"In the example network from section 2, how many hidden units are there?",The network has 4 hidden units
+What activation function is used in the output layer of the example network?,The softmax activation function is used in the output layer
+What does 𝑧𝑙 represent in the neural network notation?,𝑧𝑙 represents the pre-activation values (outputs of the linear module) for layer 𝑙
+How is the bias vector 𝑊𝑙0 dimensioned for layer 𝑙?,"𝑊𝑙0 is a 1×𝑛𝑙 vector, where 𝑛𝑙 is the number of outputs from layer 𝑙"
+What does 𝑎𝑙 represent in the neural network notation?,"𝑎𝑙 represents the activations of layer 𝑙, which are the outputs after applying the activation function"
+What does the forward method of a linear module compute?,"The forward method computes 𝑍=𝐴𝑊+𝑊0, where 𝐴 is the input from the previous layer"
+Why does the forward method need to store its input values?,The input values need to be stored for use during the backward pass (backpropagation)
+"In the forward pass, what is the order of operations through the network?","The forward pass proceeds from input to output, with each layer's output serving as input to the next layer"
+What is the purpose of the Loss function in a neural network?,The Loss function measures the difference between the network's output values 𝑎 and the target values 𝑦
+"For softmax output with NLLM loss, what is the simple form of dLdZ?","For softmax output with NLLM loss, dLdZ equals the prediction error (𝐴−𝑌)"
+What shape should the output of the Loss function have?,The Loss function should output a scalar value representing the total error
+Why is dLdW0 equal to dLdZ in the linear module's backward method?,Because the derivative of 𝑍=𝐴𝑊+𝑊0 with respect to 𝑊0 is the identity matrix
+How is dLdW computed in terms of A and dLdZ?,dLdW is computed as A.T @ dLdZ (transpose of A multiplied by dLdZ)
+What are the dimensions of dLdW for a layer?,"dLdW has dimensions 𝑚𝑙×𝑛𝑙, matching the dimensions of the weight matrix W"
+What Python operator is used for matrix multiplication in the homework?,The @ operator is used for matrix multiplication in Python
+How is matrix transpose denoted in the Python expressions?,Matrix transpose is denoted using .T in Python
+What special consideration is given for ReLU's derivative at x=0?,"For the homework, the derivative of ReLU at x=0 is assumed to be 0, even though ReLU is technically not differentiable at 0"
+"In linear classification, if we permute the order of features in a linearly separable dataset, will the dataset remain linearly separable?","Yes, because we can apply the same permutation to the θ values learned in the original problem such that θᵀx+θ₀ equals the same value as before"
+Can rearranging feature order make a non-separable dataset linearly separable?,"No, because if changing the order made it separable, we could have permuted θ instead to get a separator, contradicting the premise of non-separability"
+"For a feature transformation φ(x₁,x₂)=√(x₁²+x₂²), can it make previously non-separable data separable?","Yes, this transformation converts coordinates to distance from origin, which can separate data that forms circular patterns"
+"For a feature transformation φ(x₁,x₂)=x₁-x₂, can it make previously non-separable data separable?","No, this is still a linear transformation and cannot separate data that wasn't linearly separable in original space"
+"For a feature transformation φ(x₁,x₂)=|x₁+x₂|, can it make previously non-separable data separable?","No, this transformation alone cannot separate data that wasn't linearly separable originally"
+"For a feature transformation φ(x₁,x₂)=|x₁|+|x₂|, can it make previously non-separable data separable?","Yes, this transformation can separate data that forms diamond-shaped patterns"
+"Given a dataset D={(([0,0,0],0), ([1,1,0],0), ([1,0,1],1), ([0,1,1],1))}, is it separable in [x₁,x₂] space?","No, this is the classic XOR problem which is not linearly separable in two dimensions"
+"Given a dataset D={(([0,0,0],0), ([1,1,0],0), ([1,0,1],1), ([0,1,1],1))}, is it separable in [x₃] space?","Yes, all points with label 0 have x₃=0 and all points with label 1 have x₃=1"
+"Given a dataset D={(([0,0,0],0), ([1,1,0],0), ([1,0,1],1), ([0,1,1],1))}, is it separable in [x₁,x₂,x₃] space?","Yes, because it's separable in x₃ alone, it must be separable in the higher dimensional space"
+"Given a dataset D={(([0,0,1],0), ([0,1,0],0), ([1,1,1],1), ([1,0,0],1))}, is it separable in [x₁,x₂] space?","Yes, all points can be separated by x₁ value alone"
+"For a 2D non-separable dataset, can a linear transformation φ(x)=Ax where A is a 2×2 matrix make it separable?","No, because any linear transformation could be expressed as part of the original classifier, contradicting non-separability"
+"For a separable dataset, what matrix transformation A would make it not separable?","The zero matrix [[0,0],[0,0]] will collapse all points to origin, making separation impossible"
+"In one-hot encoding a cell phone dataset (Samsung=1 to Nokia=6) with {([2],1),([3],1),([4],-1),([5],-1)}, what θ value with θ₀=7 separates the data?","-2, as this creates correct classification: -2(2)+7>0, -2(3)+7>0, -2(4)+7<0, -2(5)+7<0"
+"With the cell phone classifier (θ=-2,θ₀=7), what are predictions for Samsung(1) and Nokia(6)?","Samsung classified as positive (-2(1)+7=5>0), Nokia as negative (-2(6)+7=-5<0)"
+Are predictions from integer-encoded phone brands meaningful given training data?,"No, because predictions are based on arbitrary ordering of brands as integers"
+How many dimensions are needed to represent color(red/blue/green) and size(small/medium/large) using independent one-hot vectors?,6 dimensions total - 3 dimensions for color and 3 dimensions for size
+"When using polynomial features in regression, what happens if order equals n-1 (n=number of data points)?","The model overfits to training data, achieving perfect fit but failing to generalize to new points"
+Why does polynomial regression fail for orders 10 or higher?,The analytic solution becomes undefined as orders higher than data points have no exact solution
+"How do parameter magnitudes (θ,θ₀) change with increasing polynomial order?","They increase in magnitude, indicating overfitting"
+"If positive label points satisfy x₂=x₁²+2 and negative points satisfy x₂=x₁²-1, can transformation φ(x₁,x₂)=[x₁²+x₂,x₂] separate the data?","Yes, because a linear combination of these features can produce x₂-x₁² which separates the classes"
+"If positive label points satisfy x₂=x₁²+2 and negative points satisfy x₂=x₁²-1, can transformation φ(x₁,x₂)=[-x₁²+x₂] separate the data?","Yes, this directly gives x₂-x₁² which separates the classes"
+"If positive label points satisfy x₂=x₁²+2 and negative points satisfy x₂=x₁²-1, can transformation φ(x₁,x₂)=[x₁²,x₂²] separate the data?","No, this transformation doesn't preserve the relationship between x₂ and x₁² needed for separation"
+"In ridge regression with polynomial features, how do higher λ values affect the fit?",Higher λ produces fits similar to lower order polynomials by reducing weights of higher-order terms
+What's the benefit of using encoding B (independent one-hot vectors) over encoding A (single one-hot vector) for presents data?,"Encoding B allows sharing information between similar features, enabling better generalization when a new point shares size or color with training points"
+Why might encoding A (single one-hot vector) perform poorly on unseen combinations?,"Because it treats each combination independently, giving no weight to shared attributes between combinations"
+What happens to weights in regularized LLC for unseen feature combinations in encoding A?,"They get regularized to zero, leading to 0.5 probability predictions for unseen combinations"
+"For a dataset with positive points at (x₁,x₂=x₁²+2) and negative at (x₁,x₂=x₁²-1), can φ(x₁,x₂)=[x₁,x₂,x₁-x₁²] separate data?","Yes, because we can obtain x₂-x₁² through linear combination of features"
+When does regularization help prevent overfitting in polynomial regression?,When λ is large enough to reduce the influence of higher-order terms that might cause the function to oscillate between data points
+What's the relationship between polynomial order and model complexity?,"Higher orders allow more complex functions but increase risk of overfitting, especially when order approaches number of data points"
+What is an attention matrix?,An attention matrix represents weights that determine how much each token in a sequence should focus on other tokens. Each row must sum to 1 as it represents a probability distribution over all tokens.
+"In a transformer with 3 tokens and embedding dimension 5, what is the dimension of one attention head's Query matrix?","[3, 5] - The Query matrix has dimensions (number of tokens × embedding dimension)"
+What are the three key matrices needed for each attention head in a transformer?,"Query matrix (Q), Key matrix (K), and Value matrix (V). Each is created by multiplying the input by learned weight matrices Wq, Wk, and Wv respectively."
+Why do we divide attention scores by sqrt(dk) in the transformer attention mechanism?,"This scaling factor prevents dot products from growing too large in magnitude for high dimensions, which could push the softmax function into regions with very small gradients."
+How are residual connections implemented in a transformer?,"Residual connections add the input directly to the output of a layer: output = x + F(x), where F(x) is the layer transformation."
+What is the main benefit of using multiple attention heads?,"Multiple heads allow the model to capture different types of relationships or patterns in parallel, with each head potentially focusing on different aspects of the relationships between tokens."
+"In a transformer with sequence length 4, what is the dimension of the attention matrix?","[4, 4] - The attention matrix is always square with dimensions (sequence_length × sequence_length)"
+How does a residual connection help with vanishing gradients?,"Residual connections provide direct paths for gradient flow during backpropagation, preserving the gradient signal even when it might vanish through deeper layers."
+What is the purpose of the softmax function in attention mechanisms?,"Softmax converts attention scores into a probability distribution, ensuring all weights are between 0 and 1 and sum to 1 for each query token."
+What determines the number of weights in an attention head's linear projection?,"The number of weights is determined by input dimension × output dimension. For example, projecting from dimension d to dk requires d × dk weights."
+How are positional encodings typically added in transformers?,Positional encodings are added directly to the token embeddings before the first attention layer to give the model information about token positions.
+What is the typical implementation of multi-head attention's final output layer?,"The outputs from all heads are concatenated along the feature dimension, then projected through a final linear layer to the desired output dimension."
+"In self-attention, what is the relationship between Q, K, and V matrices?","They are all derived from the same input sequence but through different learned transformations (Wq, Wk, Wv), allowing the model to compare each position with all others."
+What is the mathematical formula for computing attention scores?,"Attention(Q,K,V) = softmax(QK^T/sqrt(dk))V, where Q is queries, K is keys, V is values, and dk is the dimension of the key vectors."
+Why do transformers use layer normalization?,"Layer normalization helps stabilize the training process by normalizing the activations across the feature dimension, reducing internal covariate shift."
+What is the purpose of the feed-forward network after attention in a transformer block?,"The feed-forward network processes each position independently, allowing the model to transform the attention-weighted information and introduce non-linearity."
+How does masking work in transformer attention?,"Masking sets certain attention scores to negative infinity before softmax, effectively zeroing out those connections in the attention distribution."
+What is the difference between encoder and decoder attention masks?,"Encoder attention allows all tokens to attend to all positions, while decoder attention masks future positions to prevent tokens from attending to subsequent tokens."
+How do we handle variable sequence lengths in transformer attention?,"Variable sequences are typically padded to a fixed length, and a mask is applied to prevent attention to padding tokens by setting their attention scores to negative infinity."
+What is the role of the scaling factor in attention mechanisms?,"The scaling factor 1/sqrt(dk) prevents the dot products from growing too large with high dimensions, which could lead to very small gradients in the softmax function."
+"In 2D gradient descent with θ = [θ1; θ2] and objective function f(θ)=-3θ1 -θ1θ2 + 2θ2 + θ1^2 + θ2^2, what is the first component of ∇θf(θ)?",-3 - θ2 + 2θ1
+"In 2D gradient descent with θ = [θ1; θ2] and objective function f(θ)=-3θ1 -θ1θ2 + 2θ2 + θ1^2 + θ2^2, what is the second component of ∇θf(θ)?",-θ1 + 2 + 2θ2
+"In 2D gradient descent with objective function f(θ)=-3θ1 -θ1θ2 + 2θ2 + θ1^2 + θ2^2, what is f([1;1])?","0, calculated as: -3(1)-(1)(1)+2(1)+(1)^2 + (1)^2 = -3 - 1 + 2 + 1 + 1 = 0"
+"In 2D gradient descent with f(θ)=-3θ1 -θ1θ2 + 2θ2 + θ1^2 + θ2^2, if we start at θ=[1;1] and take one step of gradient descent with step-size η=0.1, what's the next value of θ?","[1.2, 0.7], calculated by subtracting 0.1 times the gradient [-2, 3] from [1, 1]"
+"In 2D gradient descent with f(θ)=-3θ1 -θ1θ2 + 2θ2 + θ1^2 + θ2^2, what is f([1.2;0.7])?","-1.11, calculated as -3(1.2) - (1.2)(0.7) + 2(0.7) + (1.2)^2 + (0.7)^2"
+"In 2D gradient descent with f(θ)=-3θ1 -θ1θ2 + 2θ2 + θ1^2 + θ2^2, if we start at θ=[1;1] and take one step with step-size η=1.0, what's the next value of θ?","[3, -2], calculated by subtracting 1.0 times the gradient [-2, 3] from [1, 1]"
+"In 2D gradient descent with f(θ)=-3θ1 -θ1θ2 + 2θ2 + θ1^2 + θ2^2, what is f([3;-2])?","6, calculated as -3(3) - (3)(-2) + 2(-2) + (3)^2 + (-2)^2"
+"For loss function L1(g,a)=|g-a| (absolute difference), does it penalize big differences between g and a more than, same as, or less than squared error?","Less than squared error. For any large difference >1, the absolute value will be less than its square."
+"For Pseudo-Huber loss Lh(g,a)=√(1+(g-a)^2)-1, does it penalize big differences between g and a more than, same as, or less than squared error?","Less than squared error. For large |g-a|, Pseudo-Huber loss grows linearly while squared error grows quadratically."
+"What is the derivative of Pseudo-Huber loss Lh(g,a)=√(1+(g-a)^2)-1 with respect to g?","(g-a)/√(1+(g-a)^2), derived using chain rule"
+"In ridge regression with objective J_ridge(θ,θ0)=(1/n)∑(θᵀx^(i)+θ0-y^(i))^2+λ||θ||^2, what is the function f(x,y;θ,θ0) that makes the objective equivalent to ∑f?",(1/n)((θᵀx+θ0-y)^2+λθᵀθ)
+"In a 1D regression problem with hypothesis h(x;θ)=θx and dataset {(1,1),(1,-1)}, what value of θ minimizes the mean squared loss?","0, because it minimizes (θ-1)^2+(θ+1)^2=2θ^2+2"
+"Starting from θ=1 with step size η=0.2, what are the values of θ after first two steps of batch gradient descent for the 1D regression with dataset {(1,1),(1,-1)}?","[0.6, 0.36], calculated using gradient -2θ"
+"For 1D regression with dataset {(1,1),(1,-1)}, starting at θ=-1/9 with step size η=0.2 and alternating between data points starting with (1,1), what are the first four θ values in SGD?","[1/9, -1/9, 1/9, -1/9], showing oscillation between values"
+"In a fully-connected feedforward network, how many weights (including biases) are needed for one layer with 100 inputs and 80 outputs?","8080 weights are needed (80 units × 101 incoming weights each, where the 101 consists of 100 input weights plus 1 bias per output unit)"
+"For a CNN with input size 100, 10 filters of size 5, zero-padding of 2 on both ends, and stride of 1, what are the dimensions of the output?","[100, 10] - The length remains 100 due to padding and stride=1, and there are 10 channels from the 10 filters"
+How many weights (including bias) are needed to specify the map from input to output in a CNN layer with 10 filters of size 5?,"60 weights total - each filter has 5 weights plus 1 bias, and there are 10 filters"
+"For a zero-padded max pooling layer with input size 100, pool size 3, stride 2, and padding size 1, what are the output dimensions?",[50] - The stride of 2 reduces the dimension by half
+How many weights are needed to specify a max pooling layer?,0 weights - max pooling layers don't have any learnable parameters
+"In converting a convolutional layer to fully connected form, if filter f=(w₁,w₂,w₃) with stride 1 and padding 1 generates output z, what is the correct form of matrix Wᵀ for z=Wᵀx?","[[w₂,w₃,0,0], [w₁,w₂,w₃,0], [0,w₁,w₂,w₃], [0,0,w₁,w₂]] - This shows how the filter slides across the input"
+"In a CNN designed to detect a specific pattern, what bias value W₀ would guarantee positive ReLU output only for exact pattern matches when max pooling is used?","Any value between -9 and -7 would work, as exact matches give score 9 while partial matches give at most 7"
+"For 1D data with input [0 0 1 1 0 0 1 0], what 3x1 filter and offset produces output [0 0 0 0 0 0 1 0]?","Filter=[-2, 1, -2] and offset=-0.5 works (other similar solutions possible) as this detects the specific pattern"
+"If we take two 1D images [0 0 0 0 0 0 1 0] and [0 0 0 0 0 1 0 0] as channels and convolve with [[[1,1]]], what's the result?","[0, 0, 0, 0, 0, 1, 1, 0] - The 1x1 filter adds the two channels together"
+"In a CNN for cat detection where training images have cats in lower left quadrant, can a CNN with 20x20 kernel and global max pooling generalize to cats in upper right?","Yes, because the large kernel can detect the cat pattern and max pooling makes the detection location-invariant"
+"For cat detection, with a CNN using 3x3 kernel, ReLU, flatten, and linear layer, can it reliably detect cats in training data?","No, because the 3x3 kernel is too small to capture the full cat pattern which requires at least 20x20 pixels"
+"For cat detection, can a CNN with three conv layers (3x3 kernel), ReLU, and max pooling between them detect cats reliably?","Yes, because multiple layers build a hierarchy of features that can cover the required receptive field for cat detection"
+Can a fully-connected network with many layers achieve high training accuracy on cat detection data?,"Yes, because it has enough parameters to memorize the training data patterns"
+Would the fully-connected network generalize well to cats in different positions?,"No, because it lacks the translation invariance properties of CNNs with pooling layers"
+"When implementing CNN layers in PyTorch, what parameters are needed for Conv2d?","in_channels, out_channels, and kernel_size are required parameters, with optional stride and padding"
+What happens when CNN kernel size gets too large relative to input?,The network becomes overparameterized and may struggle to learn effectively
+Why is max pooling useful in CNNs?,It provides translation invariance and reduces spatial dimensions while preserving important features
+What's the difference between valid and same padding in convolutions?,"Valid padding uses no padding, while same padding preserves input dimensions by adding appropriate padding"
+How does stride affect output size in convolution?,Output size = (Input size - Kernel size + 2*Padding)/Stride + 1
+What's the benefit of using multiple conv layers instead of one large kernel?,Multiple layers can learn hierarchical features with fewer parameters than one large kernel
+How does the number of parameters compare between CNN and fully-connected layers?,CNNs have far fewer parameters due to parameter sharing in convolution kernels
+Why use ReLU activation between conv layers?,ReLU introduces non-linearity and helps prevent vanishing gradients
+What's the purpose of flattening layer in CNNs?,It converts the 2D/3D feature maps into 1D vectors for fully connected layers
+How does dropout help in CNN training?,It prevents overfitting by randomly zeroing activations during training
+What determines the number of channels in CNN output?,The number of filters (kernels) in the convolutional layer
+Why use multiple channels in input to conv layers?,Multiple channels can capture different aspects/features of the input
+How does batch normalization help CNN training?,"It stabilizes training by normalizing activations, allowing higher learning rates"
+What's the advantage of 1x1 convolutions?,They can change the number of channels and add non-linearity without spatial effects
+How do you calculate receptive field size in CNN?,Accumulate the product of all strides and add kernel sizes through the layers
+Why use global average pooling instead of flattening?,It reduces parameters and provides some translation invariance
+What's the purpose of dilated convolutions?,They increase receptive field without increasing parameters or reducing resolution
+How does channel-wise convolution differ from regular convolution?,It applies separate filters to each input channel independently
+Why use cross-entropy loss for CNN classification?,It's suitable for multi-class problems and provides good gradients
+What initializations work well for CNN layers?,"He initialization for ReLU networks, Xavier/Glorot for tanh activations"
