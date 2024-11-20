@@ -1,0 +1,53 @@
+Question,Answer
+What is the course code?,ESE 577
+What is the course title?,Deep Learning: Algorithms and Software
+Who is teaching the course?,Jorge Mendez-Mendez
+When is the course offered?,Fall 2024
+What day and time are the lectures held?,Thursdays 6:30 pm – 9:20 pm
+Where are the lectures held?,Frey Hall 216
+Is attendance mandatory for lectures?,"Yes, attendance is mandatory."
+What is the instructor's office hour?,"Mondays and Wednesdays, 3:00 pm – 5:00 pm"
+Where is the instructor's office located?,"Light Engineering Building, Room 145"
+What is the main topic of the course?,Introduction to deep learning using neural networks.
+What are the key topics covered in the course?,"Basic neural networks, CNNs, RNNs, deep unsupervised and reinforcement learning, and applications like speech recognition and computer vision."
+What is the credit value of the course?,3 credits
+What is the grading system?,Grading ABCF
+What is the format of the class sessions?,"A mix of short lectures, tutorials, hands-on problem solving, and group project work."
+What is the lecture schedule?,"08/29 to 12/05, with weekly topics."
+What topics are covered in the first lecture?,"Introduction to machine learning, regression, regularization"
+What is the focus of the lecture on 09/05?,Gradient descent
+What is the focus of the lecture on 09/12?,Logistic regression
+What is the focus of the lecture on 09/19?,Features
+What is the focus of the lecture on 10/03?,Convolutional neural nets (CNNs)
+What is the focus of the lecture on 10/10?,"Modern neural nets: early stopping, dropout, batch normalization, skip connections"
+What is the focus of the lecture on 10/17?,"Sequential data, recurrent neural nets"
+What is the focus of the lecture on 10/24?,Transformers
+What is the focus of the lecture on 11/07?,Markov decision processes (MDPs)
+What is the focus of the lecture on 11/21?,Deep reinforcement learning
+When is the lecture on deep reinforcement learning scheduled?,11/21
+Is there a class on Thanksgiving week?,"No, there are no classes on 11/28 (Thanksgiving break)."
+What are the recommended books for this course?,"'Deep learning with Python' by François Chollet, 'Deep learning: A visual approach' by Andrew Glassner, 'Deep learning with PyTorch' by Eli Stevens et al., 'Deep learning' by Ian Goodfellow et al."
+Which book by François Chollet is recommended?,'Deep learning with Python' (2nd edition) by François Chollet
+What percentage of the grade do quizzes contribute?,10%
+How many quizzes are there in total?,"14 quizzes, best 10 grades kept."
+How are quizzes graded?,"Quizzes are graded, and the best 10 of 14 scores are retained."
+What percentage of the grade is the homework?,20%
+How many homework assignments are there?,"Approximately 10 homework assignments, weekly."
+What percentage of the grade is the project?,20%
+What percentage of the grade is the midterm?,20%
+What percentage of the grade is the final exam?,30%
+What is the penalty for late assignments?,20% per day.
+How many 1-day extensions are allowed for homework?,Three automatic 1-day extensions.
+What is the policy for collaboration on assignments?,Students may discuss with one peer but must write their own code and submission.
+What is the policy on academic integrity?,Students must pursue academic goals honestly and be personally accountable for all submitted work.
+What should students do if they require emergency evacuation assistance?,Discuss their needs with their professors and the Student Accessibility Support Center.
+Where should students with disabilities contact for accommodations?,"Student Accessibility Support Center, Stony Brook Union Suite 107."
+What is the contact information for the Student Accessibility Support Center?,"Phone: (631) 632-6748, Email: sasc@stonybrook.edu"
+What are the benefits of recitation during lectures?,Recitations allow hands-on problem solving and coding exercises.
+What applications of deep learning are covered in the course?,"Speech recognition, Facebook tag suggestions, self-driving cars, etc."
+Which neural network structures are introduced in the course?,"Basic, convolutional, and recurrent neural networks."
+What kind of learning methods are discussed in the course?,"Supervised, unsupervised, and reinforcement learning methods."
+How many credits is the course worth?,3 credits
+What does the course teach about reinforcement learning?,"Foundations, Markov decision processes, and deep reinforcement learning applications."
+What kind of project work is included in the course?,Group project work on real-world applications of deep learning.
+What topics are covered in the last lecture?,The future of deep learning.
